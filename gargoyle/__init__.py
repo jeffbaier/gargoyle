@@ -24,7 +24,12 @@ def autodiscover():
     """
     import copy
     from django.conf import settings
-    from django.utils.importlib import import_module
+    
+    try:
+        from importlib import import_module
+    except:
+        # removed in django 1.9, only included for backwards compatibility
+        from django.utils.importlib import import_module
 
     for app in settings.INSTALLED_APPS:
         # Attempt to import the app's gargoyle module.
